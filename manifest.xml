@@ -1,0 +1,18 @@
+<package version="0.0">
+  <name>community.livecode.macos.dockbadge</name>
+  <title>macOS Dock Badge</title>
+  <author>community</author>
+  <version>1.0.0</version>
+  <license>community</license>
+  <type>library</type>
+  <requires name="com.livecode.objc"/>
+  <requires name="com.livecode.arithmetic"/>
+  <requires name="com.livecode.binary"/>
+  <requires name="com.livecode.list"/>
+  <requires name="com.livecode.logic"/>
+  <requires name="com.livecode.string"/>
+  <requires name="com.livecode.type"/>
+  <requires name="com.livecode.system"/>
+  <handler name="SetDockBadgeLabel" parameters="in string" return="any"/>
+  <handler name="ClearDockBadge" parameters="" return="any"/>
+</package>

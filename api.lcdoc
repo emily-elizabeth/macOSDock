@@ -1,0 +1,65 @@
+Name: community.livecode.macos.dockbadge
+
+Type: library
+
+Summary: Sets and clears the macOS dock icon badge label.
+
+Description:
+A LiveCode Builder library that wraps the macOS Cocoa <NSDockTile> API,
+allowing you to display or remove a badge label on your application's
+dock icon at runtime.
+
+Requires OpenXTalk 1.14 or greater. macOS only.
+
+------------------------------------------------------------------------
+
+Name: SetDockBadgeLabel
+
+Type: handler
+
+Syntax: SetDockBadgeLabel(<pLabel>)
+
+Summary: Sets the dock icon badge to the specified string.
+
+Parameters:
+pLabel (String): The text to display in the dock badge. Pass an empty
+string to clear the badge.
+
+Description:
+Calls <NSDockTile setBadgeLabel:> on the shared NSApplication's dock
+tile. The label is typically a short string such as a number. Passing
+an empty string removes the badge entirely.
+
+If your stack runs on multiple platforms, guard this call:
+
+    if the platform is "macos" then
+       SetDockBadgeLabel "99"
+    end if
+
+Examples:
+-- Show a count badge
+SetDockBadgeLabel "99"
+
+-- Update the badge
+SetDockBadgeLabel "5"
+
+-- Clear the badge by passing an empty string
+SetDockBadgeLabel ""
+
+------------------------------------------------------------------------
+
+Name: ClearDockBadge
+
+Type: handler
+
+Syntax: ClearDockBadge()
+
+Summary: Removes the badge from the dock icon.
+
+Description:
+Convenience handler that calls SetDockBadgeLabel with an empty string,
+removing any badge currently displayed on the dock icon.
+
+Example:
+-- Remove the badge when all notifications are dismissed
+ClearDockBadge
