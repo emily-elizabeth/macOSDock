@@ -4,7 +4,7 @@ use com.livecode.foreign
 use com.livecode.objc
 
 metadata title is "macOS Dock Badge"
-metadata author is "community"
+metadata author is "Emily-Elizabeth Howard"
 metadata version is "1.0.0"
 
 private foreign handler ObjC_NSApplicationSharedApplication() \

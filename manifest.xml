@@ -1,7 +1,7 @@
 <package version="0.0">
   <name>community.livecode.macos.dockbadge</name>
   <title>macOS Dock Badge</title>
-  <author>community</author>
+  <author>Emily-Elizabeth Howard</author>
   <version>1.0.0</version>
   <license>community</license>
   <type>library</type>
