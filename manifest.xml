@@ -1,0 +1,21 @@
+<package version="0.0">
+  <name>org.openxtalk.macosdock</name>
+  <title>macOS Dock</title>
+  <author>Emily-Elizabeth Howard</author>
+  <version>1.1.0</version>
+  <license>community</license>
+  <type>library</type>
+  <requires name="com.livecode.foreign"/>
+  <requires name="com.livecode.arithmetic"/>
+  <requires name="com.livecode.binary"/>
+  <requires name="com.livecode.list"/>
+  <requires name="com.livecode.logic"/>
+  <requires name="com.livecode.string"/>
+  <requires name="com.livecode.type"/>
+  <requires name="com.livecode.system"/>
+  <metadata key="platform">mac</metadata>
+  <handler name="SetDockBadgeLabel" parameters="in string" return="any"/>
+  <handler name="ClearDockBadge" parameters="" return="any"/>
+  <handler name="SetDockIconImage" parameters="in string" return="any"/>
+  <handler name="ResetDockIconImage" parameters="" return="any"/>
+</package>

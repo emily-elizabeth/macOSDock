@@ -53,16 +53,18 @@ Summary: Sets the dock icon to an image loaded from the given file path.
 
 Parameters:
 
-pPath: The full file path to an image file (e.g. PNG, ICNS, TIFF).
+pPath: An absolute file path to an image file (e.g. PNG, ICNS, TIFF).
 
-Example: SetDockIconImage "/path/to/myicon.png"
+Example: SetDockIconImage "/Users/emily/myapp/icons/alert.png"
 
 Description: Use the <SetDockIconImage> command to dynamically change the application's
 macOS dock icon at runtime, for example to reflect application state or progress.
 
-The image at pPath is loaded as an NSImage and applied via the macOS
-NSApplication setApplicationIconImage: API. To restore the original icon, use
-<ResetDockIconImage>.
+pPath must be an absolute file path. Relative paths are not supported as the underlying
+Cocoa API (NSImage initWithContentsOfFile:) does not resolve them.
+
+The image is applied via the macOS NSApplication setApplicationIconImage: API. To
+restore the original icon, use <ResetDockIconImage>.
 
 This command has no effect on non-Mac platforms.
 

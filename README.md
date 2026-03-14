@@ -31,8 +31,8 @@ SetDockBadgeLabel "5"
 -- Clear the badge
 ClearDockBadge
 
--- Set a custom dock icon
-SetDockIconImage "/path/to/myicon.png"
+-- Set a custom dock icon (absolute path required)
+SetDockIconImage "/Users/emily/myapp/icons/alert.png"
 
 -- Restore the default dock icon
 ResetDockIconImage
@@ -52,7 +52,7 @@ All handlers include a built-in platform guard — calling them on Windows or Li
 |---|---|---|
 | `SetDockBadgeLabel` | `pLabel` — String | Sets the dock icon badge to the given string. Pass `""` to clear. |
 | `ClearDockBadge` | — | Clears the dock icon badge. |
-| `SetDockIconImage` | `pPath` — String | Sets the dock icon to an image file at the given path. |
+| `SetDockIconImage` | `pPath` — String | Sets the dock icon to an image file at the given absolute path. |
 | `ResetDockIconImage` | — | Restores the dock icon to the default application icon. |
 
 Full API documentation is in `api.lcdoc`.

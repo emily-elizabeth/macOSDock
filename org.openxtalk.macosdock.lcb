@@ -6,81 +6,72 @@ use com.livecode.objc
 metadata title is "macOS Dock"
 metadata author is "Emily-Elizabeth Howard"
 metadata version is "1.1.0"
+metadata platform is "mac"
 
-private foreign handler ObjC_NSApplicationSharedApplication() \
-    returns ObjcId \
-    binds to "objc:NSApplication.+sharedApplication"
+-- ---------------------------------------------------------------------------
+-- Glue: badge
+-- ---------------------------------------------------------------------------
 
-private foreign handler ObjC_NSApplicationDockTile(in pApp as ObjcId) \
-    returns ObjcId \
-    binds to "objc:NSApplication.-dockTile"
-
-private foreign handler ObjC_NSDockTileSetBadgeLabel(in pTile as ObjcId, in pLabel as ObjcId) \
+private foreign handler LCDockSetBadgeLabel( \
+        in pLabel as ZStringNative) \
     returns nothing \
-    binds to "objc:NSDockTile.-setBadgeLabel:"
+    binds to "c:macosdock_glue>LCDockSetBadgeLabel"
 
-private foreign handler ObjC_NSApplicationGetIconImage(in pApp as ObjcId) \
-    returns ObjcId \
-    binds to "objc:NSApplication.-applicationIconImage"
+-- ---------------------------------------------------------------------------
+-- Glue: icon image
+-- ---------------------------------------------------------------------------
 
-private foreign handler ObjC_NSApplicationSetIconImage(in pApp as ObjcId, in pImage as ObjcId) \
+private foreign handler LCDockSetIconImageFile( \
+        in pPath as ZStringNative) \
     returns nothing \
-    binds to "objc:NSApplication.-setApplicationIconImage:"
+    binds to "c:macosdock_glue>LCDockSetIconImageFile"
 
-private foreign handler ObjC_NSImageAlloc() \
-    returns ObjcId \
-    binds to "objc:NSImage.+alloc"
+private foreign handler LCDockResetIconImage() \
+    returns nothing \
+    binds to "c:macosdock_glue>LCDockResetIconImage"
 
-private foreign handler ObjC_NSImageInitWithContentsOfFile(in pImage as ObjcId, in pPath as ObjcId) \
-    returns ObjcId \
-    binds to "objc:NSImage.-initWithContentsOfFile:"
+-- ---------------------------------------------------------------------------
+-- Private helpers
+-- ---------------------------------------------------------------------------
+
+private handler IsMac() returns Boolean
+    return the operating system is "mac"
+end handler
+
+-- ---------------------------------------------------------------------------
+-- Public API
+-- ---------------------------------------------------------------------------
 
 -- Set the dock badge to a string (e.g. "99" or "" to clear)
 public unsafe handler SetDockBadgeLabel(in pLabel as String)
-    if the operating system is not "mac" then
+    if not IsMac() then
         return
     end if
-
-    variable tApp as ObjcId
-    variable tTile as ObjcId
-
-    put ObjC_NSApplicationSharedApplication() into tApp
-    put ObjC_NSApplicationDockTile(tApp) into tTile
-    ObjC_NSDockTileSetBadgeLabel(tTile, StringToNSString(pLabel))
+    LCDockSetBadgeLabel(pLabel)
 end handler
 
 -- Clear the dock badge
 public unsafe handler ClearDockBadge()
-    if the operating system is not "mac" then
+    if not IsMac() then
         return
     end if
-
-    SetDockBadgeLabel("")
+    LCDockSetBadgeLabel("")
 end handler
 
 -- Set the dock icon to an image file at the given path
 public unsafe handler SetDockIconImage(in pPath as String)
-    if the operating system is not "mac" then
+    if not IsMac() then
         return
     end if
-
-    variable tApp as ObjcId
-    variable tImage as ObjcId
-
-    put ObjC_NSApplicationSharedApplication() into tApp
-    put ObjC_NSImageInitWithContentsOfFile(ObjC_NSImageAlloc(), StringToNSString(pPath)) into tImage
-    ObjC_NSApplicationSetIconImage(tApp, tImage)
+    LCDockSetIconImageFile(pPath)
 end handler
 
 -- Reset the dock icon to the default application icon
 public unsafe handler ResetDockIconImage()
-    if the operating system is not "mac" then
+    if not IsMac() then
         return
     end if
-
-    variable tApp as ObjcId
-    put ObjC_NSApplicationSharedApplication() into tApp
-    ObjC_NSApplicationSetIconImage(tApp, ObjC_NSApplicationGetIconImage(tApp))
+    LCDockResetIconImage()
 end handler
 
 end library
