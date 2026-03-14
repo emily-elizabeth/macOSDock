@@ -1,9 +1,84 @@
-Library: 
+Name: SetDockBadgeLabel
 
-Type: 
+Type: command
 
-author: Emily-Elizabeth Howard
+Syntax: SetDockBadgeLabel <pLabel>
 
-version: 1.0.0
+Summary: Sets the dock icon badge to the specified string.
+
+Parameters:
+
+pLabel: The text to display in the dock badge. Pass empty to clear the badge.
+
+Example: SetDockBadgeLabel "99"
+
+Example: SetDockBadgeLabel ""
+
+Description: Use the <SetDockBadgeLabel> command to display a badge label on the
+application's macOS dock icon. The label is typically a short string such as a number
+representing a count or status.
+
+Passing an empty string removes the badge entirely. To clear the badge you can also
+use the convenience handler <ClearDockBadge>.
+
+This command has no effect on non-Mac platforms.
 
 
+
+Name: ClearDockBadge
+
+Type: command
+
+Syntax: ClearDockBadge
+
+Summary: Removes the badge from the dock icon.
+
+Example: ClearDockBadge
+
+Description: Use the <ClearDockBadge> command to remove any badge label currently
+displayed on the application's macOS dock icon. This is a convenience wrapper around
+<SetDockBadgeLabel> with an empty string.
+
+This command has no effect on non-Mac platforms.
+
+
+
+Name: SetDockIconImage
+
+Type: command
+
+Syntax: SetDockIconImage <pPath>
+
+Summary: Sets the dock icon to an image loaded from the given file path.
+
+Parameters:
+
+pPath: The full file path to an image file (e.g. PNG, ICNS, TIFF).
+
+Example: SetDockIconImage "/path/to/myicon.png"
+
+Description: Use the <SetDockIconImage> command to dynamically change the application's
+macOS dock icon at runtime, for example to reflect application state or progress.
+
+The image at pPath is loaded as an NSImage and applied via the macOS
+NSApplication setApplicationIconImage: API. To restore the original icon, use
+<ResetDockIconImage>.
+
+This command has no effect on non-Mac platforms.
+
+
+
+Name: ResetDockIconImage
+
+Type: command
+
+Syntax: ResetDockIconImage
+
+Summary: Restores the dock icon to the default application icon.
+
+Example: ResetDockIconImage
+
+Description: Use the <ResetDockIconImage> command to restore the application's macOS
+dock icon to its original default after a previous call to <SetDockIconImage>.
+
+This command has no effect on non-Mac platforms.

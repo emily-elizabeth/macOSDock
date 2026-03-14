@@ -1,30 +1,28 @@
-# community.livecode.macos.dockbadge
+# org.openxtalk.macosdock
 
-A LiveCode Builder library for setting and clearing the macOS dock icon badge label.
+A LiveCode Builder library for controlling the macOS dock icon — set and clear badge labels, and set or reset the dock icon image.
 
 ---
 
 ## Requirements
 
 - **OpenXTalk 1.14** or greater
-- macOS (uses Cocoa `NSDockTile` API — not available on other platforms)
+- macOS (uses Cocoa `NSDockTile` and `NSApplication` APIs)
 
 ---
 
 ## Installation
 
 1. Open the **Extension Builder** in the OpenXTalk IDE.
-2. Load `dockbadge.lcb`.
+2. Load `org.openxtalk.macosdock.lcb`.
 3. Click **Test** to compile, or **Install** to make it available in your stack.
 
 ---
 
 ## Usage
 
-Once the extension is installed, call the handlers from any LiveCode Script:
-
 ```livecode
--- Show a badge with a number
+-- Show a badge
 SetDockBadgeLabel "99"
 
 -- Update the badge
@@ -32,19 +30,21 @@ SetDockBadgeLabel "5"
 
 -- Clear the badge
 ClearDockBadge
-```
 
-To clear the badge you can also pass an empty string:
+-- Set a custom dock icon
+SetDockIconImage "/path/to/myicon.png"
 
-```livecode
-SetDockBadgeLabel ""
+-- Restore the default dock icon
+ResetDockIconImage
 ```
 
 ---
 
 ## Cross-platform note
 
-This library is macOS-only, but the handlers include a built-in platform guard — calling `SetDockBadgeLabel` or `ClearDockBadge` on Windows or Linux is a safe no-op, so no additional checks are needed in your stack script.
+All handlers include a built-in platform guard — calling them on Windows or Linux is a safe no-op, so no additional checks are needed in your stack script.
+
+---
 
 ## API
 
@@ -52,5 +52,7 @@ This library is macOS-only, but the handlers include a built-in platform guard �
 |---|---|---|
 | `SetDockBadgeLabel` | `pLabel` — String | Sets the dock icon badge to the given string. Pass `""` to clear. |
 | `ClearDockBadge` | — | Clears the dock icon badge. |
+| `SetDockIconImage` | `pPath` — String | Sets the dock icon to an image file at the given path. |
+| `ResetDockIconImage` | — | Restores the dock icon to the default application icon. |
 
 Full API documentation is in `api.lcdoc`.
