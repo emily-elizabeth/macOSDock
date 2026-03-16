@@ -76,11 +76,11 @@ static void ensureMenuRegistry(void) {
     if (!sMenuItems)  sMenuItems  = [NSMutableDictionary dictionary];
 }
 
-void LCDockMenuAddItem(const char *identifier, const char *title) {
+void LCDockMenuAddItem(const char *identifier, void *title) {
     if (!identifier || !title) return;
     ensureMenuRegistry();
     NSString *ident = [NSString stringWithUTF8String:identifier];
-    NSString *label = [NSString stringWithUTF8String:title];
+    NSString *label = (__bridge NSString *)title;
     if (![sMenuOrder containsObject:ident])
         [sMenuOrder addObject:ident];
     sMenuItems[ident] = @{ @"title": label, @"enabled": @YES, @"separator": @NO };

@@ -6,6 +6,7 @@
   <license>community</license>
   <type>library</type>
   <requires name="com.livecode.foreign"/>
+  <requires name="com.livecode.objc"/>
   <requires name="com.livecode.engine"/>
   <requires name="com.livecode.arithmetic"/>
   <requires name="com.livecode.binary"/>

@@ -53,7 +53,7 @@ private foreign handler LCDockMenuClearClickCallback() \
 
 private foreign handler LCDockMenuAddItem( \
         in pIdentifier as ZStringNative, \
-        in pTitle      as ZStringNative) \
+        in pTitle      as ObjcId) \
     returns nothing \
     binds to "c:macosdock_glue>LCDockMenuAddItem"
 
@@ -180,7 +180,7 @@ public unsafe handler DockMenuAddItem( \
     if not IsMac() then
         return
     end if
-    LCDockMenuAddItem(pIdentifier, pTitle)
+    LCDockMenuAddItem(pIdentifier, StringToNSString(pTitle))
 end handler
 
 -- Add a separator to the dock menu

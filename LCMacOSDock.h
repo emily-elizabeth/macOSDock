@@ -18,7 +18,7 @@ void  LCDockMenuSetClickCallback(LCDockMenuClickCallback cb);
 void  LCDockMenuClearClickCallback(void);
 
 // Dock menu — item management
-void  LCDockMenuAddItem(const char *identifier, const char *title);
+void  LCDockMenuAddItem(const char *identifier, void *title);
 void  LCDockMenuAddSeparator(void);
 void  LCDockMenuRemoveItem(const char *identifier);
 void  LCDockMenuClear(void);
