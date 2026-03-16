@@ -1,5 +1,6 @@
 import module org.openxtalk.macosdock
   use com.livecode.foreign
+  use com.livecode.engine
   use com.livecode.arithmetic
   use com.livecode.binary
   use com.livecode.list
@@ -7,8 +8,16 @@ import module org.openxtalk.macosdock
   use com.livecode.string
   use com.livecode.type
   use com.livecode.system
+  foreign handler type DockMenuClickCallback(in pLabel as ZStringNative) returns nothing
   unsafe handler SetDockBadgeLabel(in pLabel as String) returns optional any
   unsafe handler ClearDockBadge() returns optional any
   unsafe handler SetDockIconImage(in pLabel as String) returns optional any
   unsafe handler ResetDockIconImage() returns optional any
+  unsafe handler DockMenuInstall() returns optional any
+  unsafe handler DockMenuUninstall() returns optional any
+  unsafe handler DockMenuAddItem(in pIdentifier as String, in pTitle as String) returns optional any
+  unsafe handler DockMenuAddSeparator() returns optional any
+  unsafe handler DockMenuRemoveItem(in pLabel as String) returns optional any
+  unsafe handler DockMenuClear() returns optional any
+  unsafe handler DockMenuSetItemEnabled(in pIdentifier as String, in pEnabled as Boolean) returns optional any
 end module

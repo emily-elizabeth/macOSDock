@@ -12,6 +12,22 @@ void  LCDockSetBadgeLabel(const char *label);
 void  LCDockSetIconImageFile(const char *filePath);
 void  LCDockResetIconImage(void);
 
+// Dock menu — item click callback
+typedef void (*LCDockMenuClickCallback)(const char *itemIdentifier);
+void  LCDockMenuSetClickCallback(LCDockMenuClickCallback cb);
+void  LCDockMenuClearClickCallback(void);
+
+// Dock menu — item management
+void  LCDockMenuAddItem(const char *identifier, const char *title);
+void  LCDockMenuAddSeparator(void);
+void  LCDockMenuRemoveItem(const char *identifier);
+void  LCDockMenuClear(void);
+void  LCDockMenuSetItemEnabled(const char *identifier, int enabled);
+
+// Dock menu — install / uninstall
+void  LCDockMenuInstall(void);
+void  LCDockMenuUninstall(void);
+
 #ifdef __cplusplus
 }
 #endif

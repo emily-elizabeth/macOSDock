@@ -36,6 +36,37 @@ SetDockIconImage "/Users/emily/myapp/icons/alert.png"
 
 -- Restore the default dock icon
 ResetDockIconImage
+
+-- Set up a dock menu
+DockMenuAddItem "prefs", "Open Preferences"
+DockMenuAddItem "update", "Check for Updates"
+DockMenuAddSeparator
+DockMenuAddItem "quit", "Quit"
+DockMenuInstall
+
+-- Disable an item
+DockMenuSetItemEnabled "update", false
+
+-- Remove an item
+DockMenuRemoveItem "quit"
+
+-- Clear all items
+DockMenuClear
+
+-- Uninstall the dock menu
+DockMenuUninstall
+```
+
+Handle the click message in your stack script:
+
+```livecode
+on dockMenuItemClicked pIdentifier
+   if pIdentifier is "prefs" then
+      -- open preferences
+   else if pIdentifier is "update" then
+      -- check for updates
+   end if
+end dockMenuItemClicked
 ```
 
 ---
@@ -54,5 +85,12 @@ All handlers include a built-in platform guard — calling them on Windows or Li
 | `ClearDockBadge` | — | Clears the dock icon badge. |
 | `SetDockIconImage` | `pPath` — String | Sets the dock icon to an image file at the given absolute path. |
 | `ResetDockIconImage` | — | Restores the dock icon to the default application icon. |
+| `DockMenuInstall` | — | Installs the dock menu and registers the caller as the message target. |
+| `DockMenuUninstall` | — | Uninstalls the dock menu and restores the original app delegate. |
+| `DockMenuAddItem` | `pIdentifier`, `pTitle` — String | Adds an item to the dock menu. |
+| `DockMenuAddSeparator` | — | Adds a separator to the dock menu. |
+| `DockMenuRemoveItem` | `pIdentifier` — String | Removes an item from the dock menu. |
+| `DockMenuClear` | — | Removes all items from the dock menu. |
+| `DockMenuSetItemEnabled` | `pIdentifier` — String, `pEnabled` — Boolean | Enables or disables a dock menu item. |
 
 Full API documentation is in `api.lcdoc`.

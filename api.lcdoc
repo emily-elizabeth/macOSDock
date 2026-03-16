@@ -84,3 +84,160 @@ Description: Use the <ResetDockIconImage> command to restore the application's m
 dock icon to its original default after a previous call to <SetDockIconImage>.
 
 This command has no effect on non-Mac platforms.
+
+
+Name: DockMenuInstall
+
+Type: command
+
+Syntax: DockMenuInstall
+
+Summary: Installs the dock menu and registers the calling script object as the message target.
+
+Example: DockMenuInstall
+
+Description: Use the <DockMenuInstall> command to activate the dock menu. The calling
+script object will receive a dockMenuItemClicked message whenever the user selects an
+item from the dock menu. The message is sent with one parameter — the identifier of the
+clicked item:
+
+    on dockMenuItemClicked pIdentifier
+       if pIdentifier is "prefs" then
+          -- open preferences
+       end if
+    end dockMenuItemClicked
+
+Call <DockMenuAddItem> to populate the menu before or after installing. The menu is
+rebuilt from the current item registry each time the user right-clicks the dock icon,
+so items can be added or removed at any time.
+
+This command has no effect on non-Mac platforms.
+
+
+
+Name: DockMenuUninstall
+
+Type: command
+
+Syntax: DockMenuUninstall
+
+Summary: Uninstalls the dock menu and restores the original app delegate.
+
+Example: DockMenuUninstall
+
+Description: Use the <DockMenuUninstall> command to remove the dock menu and restore
+the application's original NSApplicationDelegate. The dockMenuItemClicked message will
+no longer be sent after this call. Item registrations are preserved, so calling
+<DockMenuInstall> again will restore the same menu.
+
+This command has no effect on non-Mac platforms.
+
+
+
+Name: DockMenuAddItem
+
+Type: command
+
+Syntax: DockMenuAddItem <pIdentifier>, <pTitle>
+
+Summary: Adds an item to the dock menu.
+
+Parameters:
+
+pIdentifier: A unique string identifier for this item, used to identify it in the
+dockMenuItemClicked message and for subsequent calls to <DockMenuRemoveItem> and
+<DockMenuSetItemEnabled>.
+
+pTitle: The label displayed for this item in the dock menu.
+
+Example: DockMenuAddItem "prefs", "Open Preferences"
+
+Example: DockMenuAddItem "update", "Check for Updates"
+
+Description: Use the <DockMenuAddItem> command to register a menu item. Items are
+displayed in the order they were added. If an item with the same identifier already
+exists it will be updated in place.
+
+This command has no effect on non-Mac platforms.
+
+
+
+Name: DockMenuAddSeparator
+
+Type: command
+
+Syntax: DockMenuAddSeparator
+
+Summary: Adds a separator line to the dock menu.
+
+Example: DockMenuAddSeparator
+
+Description: Use the <DockMenuAddSeparator> command to insert a visual separator at the
+current position in the dock menu. Multiple separators are supported.
+
+This command has no effect on non-Mac platforms.
+
+
+
+Name: DockMenuRemoveItem
+
+Type: command
+
+Syntax: DockMenuRemoveItem <pIdentifier>
+
+Summary: Removes an item from the dock menu by identifier.
+
+Parameters:
+
+pIdentifier: The identifier of the item to remove, as passed to <DockMenuAddItem>.
+
+Example: DockMenuRemoveItem "update"
+
+Description: Use the <DockMenuRemoveItem> command to remove a previously added item
+from the dock menu. If no item with that identifier exists the call is silently ignored.
+
+This command has no effect on non-Mac platforms.
+
+
+
+Name: DockMenuClear
+
+Type: command
+
+Syntax: DockMenuClear
+
+Summary: Removes all items from the dock menu.
+
+Example: DockMenuClear
+
+Description: Use the <DockMenuClear> command to remove all items and separators from
+the dock menu. The menu delegate remains installed — call <DockMenuUninstall> if you
+want to remove the menu entirely.
+
+This command has no effect on non-Mac platforms.
+
+
+
+Name: DockMenuSetItemEnabled
+
+Type: command
+
+Syntax: DockMenuSetItemEnabled <pIdentifier>, <pEnabled>
+
+Summary: Enables or disables a dock menu item.
+
+Parameters:
+
+pIdentifier: The identifier of the item to enable or disable.
+
+pEnabled: True to enable the item, false to disable it.
+
+Example: DockMenuSetItemEnabled "update", false
+
+Example: DockMenuSetItemEnabled "prefs", true
+
+Description: Use the <DockMenuSetItemEnabled> command to enable or disable a dock menu
+item. Disabled items are shown greyed out and do not fire dockMenuItemClicked when
+clicked.
+
+This command has no effect on non-Mac platforms.

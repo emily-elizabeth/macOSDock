@@ -2,10 +2,11 @@
   <name>org.openxtalk.macosdock</name>
   <title>macOS Dock</title>
   <author>Emily-Elizabeth Howard</author>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
   <license>community</license>
   <type>library</type>
   <requires name="com.livecode.foreign"/>
+  <requires name="com.livecode.engine"/>
   <requires name="com.livecode.arithmetic"/>
   <requires name="com.livecode.binary"/>
   <requires name="com.livecode.list"/>
@@ -18,4 +19,11 @@
   <handler name="ClearDockBadge" parameters="" return="any"/>
   <handler name="SetDockIconImage" parameters="in string" return="any"/>
   <handler name="ResetDockIconImage" parameters="" return="any"/>
+  <handler name="DockMenuInstall" parameters="" return="any"/>
+  <handler name="DockMenuUninstall" parameters="" return="any"/>
+  <handler name="DockMenuAddItem" parameters="in string,in string" return="any"/>
+  <handler name="DockMenuAddSeparator" parameters="" return="any"/>
+  <handler name="DockMenuRemoveItem" parameters="in string" return="any"/>
+  <handler name="DockMenuClear" parameters="" return="any"/>
+  <handler name="DockMenuSetItemEnabled" parameters="in string,in boolean" return="any"/>
 </package>
